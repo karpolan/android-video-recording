@@ -7,7 +7,7 @@
     tools:context=".CameraFragment">
 
 
-    <com.androidwave.camera2video.camera.AutoFitTextureView
+    <com.karpolan.android.VideoRecorder.camera.AutoFitTextureView
         android:id="@+id/mTextureView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -1,4 +1,4 @@
-package com.androidwave.camera2video;
+package com.karpolan.android.VideoRecorder;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

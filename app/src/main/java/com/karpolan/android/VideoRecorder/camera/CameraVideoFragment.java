@@ -1,4 +1,4 @@
-package com.androidwave.camera2video.camera;
+package com.karpolan.android.VideoRecorder.camera;
 
 import android.Manifest;
 import android.app.Activity;
@@ -36,8 +36,8 @@ import android.view.TextureView;
 import android.view.View;
 import android.widget.Toast;
 
-import com.androidwave.camera2video.R;
-import com.androidwave.camera2video.ui.base.BaseFragment;
+import com.karpolan.android.VideoRecorder.R;
+import com.karpolan.android.VideoRecorder.ui.base.BaseFragment;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -64,6 +64,7 @@ public abstract class CameraVideoFragment extends BaseFragment {
     private static final int SENSOR_ORIENTATION_DEFAULT_DEGREES = 90;
     private static final SparseIntArray INVERSE_ORIENTATIONS = new SparseIntArray();
     private static final SparseIntArray DEFAULT_ORIENTATIONS = new SparseIntArray();
+    private static final String VIDEO_DIRECTORY_NAME = "AndroidWave";
 
     static {
         INVERSE_ORIENTATIONS.append(Surface.ROTATION_270, 0);
@@ -79,57 +80,24 @@ public abstract class CameraVideoFragment extends BaseFragment {
         DEFAULT_ORIENTATIONS.append(Surface.ROTATION_180, 270);
     }
 
-
+    /**
+     * Whether the app is recording video now
+     */
+    public boolean mIsRecordingVideo;
     private File mCurrentFile;
-
-    private static final String VIDEO_DIRECTORY_NAME = "AndroidWave";
-
     /**
      * An {@link AutoFitTextureView} for camera preview.
      */
     private AutoFitTextureView mTextureView;
-
     /**
      * A reference to the opened {@link CameraDevice}.
      */
     private CameraDevice mCameraDevice;
-
     /**
      * A reference to the current {@link CameraCaptureSession} for
      * preview.
      */
     private CameraCaptureSession mPreviewSession;
-
-    /**
-     * {@link TextureView.SurfaceTextureListener} handles several lifecycle events on a
-     * {@link TextureView}.
-     */
-    private TextureView.SurfaceTextureListener mSurfaceTextureListener
-            = new TextureView.SurfaceTextureListener() {
-
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture,
-                                              int width, int height) {
-            openCamera(width, height);
-        }
-
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture,
-                                                int width, int height) {
-            configureTransform(width, height);
-        }
-
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
-            return true;
-        }
-
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
-        }
-
-    };
-
     /**
      * The {@link Size} of camera preview.
      */
@@ -144,27 +112,20 @@ public abstract class CameraVideoFragment extends BaseFragment {
      * MediaRecorder
      */
     private MediaRecorder mMediaRecorder;
-
-    /**
-     * Whether the app is recording video now
-     */
-    public boolean mIsRecordingVideo;
-
     /**
      * An additional thread for running tasks that shouldn't block the UI.
      */
     private HandlerThread mBackgroundThread;
-
     /**
      * A {@link Handler} for running tasks in the background.
      */
     private Handler mBackgroundHandler;
-
     /**
      * A {@link Semaphore} to prevent the app from exiting before closing the camera.
      */
     private Semaphore mCameraOpenCloseLock = new Semaphore(1);
-
+    private Integer mSensorOrientation;
+    private CaptureRequest.Builder mPreviewBuilder;
     /**
      * {@link CameraDevice.StateCallback} is called when {@link CameraDevice} changes its status.
      */
@@ -199,9 +160,35 @@ public abstract class CameraVideoFragment extends BaseFragment {
         }
 
     };
-    private Integer mSensorOrientation;
-    private CaptureRequest.Builder mPreviewBuilder;
+    /**
+     * {@link TextureView.SurfaceTextureListener} handles several lifecycle events on a
+     * {@link TextureView}.
+     */
+    private TextureView.SurfaceTextureListener mSurfaceTextureListener
+            = new TextureView.SurfaceTextureListener() {
 
+        @Override
+        public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture,
+                                              int width, int height) {
+            openCamera(width, height);
+        }
+
+        @Override
+        public void onSurfaceTextureSizeChanged(SurfaceTexture surfaceTexture,
+                                                int width, int height) {
+            configureTransform(width, height);
+        }
+
+        @Override
+        public boolean onSurfaceTextureDestroyed(SurfaceTexture surfaceTexture) {
+            return true;
+        }
+
+        @Override
+        public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
+        }
+
+    };
 
     /**
      * In this sample, we choose a video size with 3x4 for  aspect ratio. for more perfectness 720 as well Also, we don't use sizes

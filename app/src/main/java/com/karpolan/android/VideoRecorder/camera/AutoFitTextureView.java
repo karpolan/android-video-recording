@@ -1,4 +1,4 @@
-package com.androidwave.camera2video.camera;
+package com.karpolan.android.VideoRecorder.camera;
 
 import android.content.Context;
 import android.util.AttributeSet;
