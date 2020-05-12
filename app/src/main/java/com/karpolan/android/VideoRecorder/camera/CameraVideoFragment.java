@@ -25,9 +25,6 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
@@ -35,6 +32,10 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 
 import com.karpolan.android.VideoRecorder.R;
 import com.karpolan.android.VideoRecorder.ui.base.BaseFragment;
@@ -366,9 +367,8 @@ public abstract class CameraVideoFragment extends BaseFragment {
             if (!mCameraOpenCloseLock.tryAcquire(2500, TimeUnit.MILLISECONDS)) {
                 throw new RuntimeException("Time out waiting to lock camera opening.");
             }
-            /**
-             * default front camera will activate
-             */
+
+            // default front camera will activate
             String cameraId = manager.getCameraIdList()[0];
 
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraId);
@@ -547,13 +547,9 @@ public abstract class CameraVideoFragment extends BaseFragment {
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        /**
-         * create video output file
-         */
+        // create video output file
         mCurrentFile = getOutputMediaFile();
-        /**
-         * set output file in media recorder
-         */
+        // set output file in media recorder
         mMediaRecorder.setOutputFile(mCurrentFile.getAbsolutePath());
         CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_480P);
         mMediaRecorder.setVideoFrameRate(profile.videoFrameRate);
@@ -589,10 +585,7 @@ public abstract class CameraVideoFragment extends BaseFragment {
             mPreviewBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_RECORD);
             List<Surface> surfaces = new ArrayList<>();
 
-            /**
-             * Surface for the camera preview set up
-             */
-
+            // Surface for the camera preview set up
             Surface previewSurface = new Surface(texture);
             surfaces.add(previewSurface);
             mPreviewBuilder.addTarget(previewSurface);

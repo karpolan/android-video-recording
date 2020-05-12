@@ -1,8 +1,9 @@
 package com.karpolan.android.VideoRecorder;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDelegate;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,7 +11,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        try {
+            getSupportActionBar().hide();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         if (null == savedInstanceState) {
             getFragmentManager().beginTransaction()
