@@ -2,7 +2,6 @@ package com.karpolan.android.VideoRecorder;
 
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.VideoView;
+
+import androidx.fragment.app.Fragment;
 
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
@@ -105,9 +106,7 @@ public class CameraFragment extends CameraVideoFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.mRecordVideo:
-                /**
-                 * If media is not recoding then start recording else stop recording
-                 */
+                // If media is not recoding then start recording else stop recording
                 if (mIsRecordingVideo) {
                     try {
                         stopRecordingVideo();
