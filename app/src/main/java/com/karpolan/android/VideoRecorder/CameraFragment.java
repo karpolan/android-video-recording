@@ -47,7 +47,7 @@ import butterknife.Unbinder;
 public class CameraFragment extends CameraVideoFragment {
 
     private static final String TAG = "CameraFragment";
-    private static final String VIDEO_DIRECTORY_NAME = "AndroidWave";
+    private static final String VIDEO_DIRECTORY_NAME = "VideoRecorder";
     @BindView(R.id.mTextureView)
     AutoFitTextureView mTextureView;
     @BindView(R.id.mRecordVideo)

@@ -3,7 +3,6 @@ package com.karpolan.android.VideoRecorder;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,11 +15,15 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+ /*
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         if (null == savedInstanceState) {
             getFragmentManager().beginTransaction()
                     .replace(R.id.container, CameraFragment.newInstance())
                     .commit();
         }
+*/
     }
+
+
 }
