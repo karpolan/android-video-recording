@@ -1,4 +1,4 @@
-package com.androidwave.camera2video;
+package com.karpolan.android.VideoRecorder;
 
 import android.os.Bundle;
 import android.os.Environment;
@@ -11,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
-import com.androidwave.camera2video.camera.AutoFitTextureView;
-import com.androidwave.camera2video.camera.CameraVideoFragment;
 import com.coremedia.iso.IsoFile;
 import com.coremedia.iso.boxes.Container;
 import com.coremedia.iso.boxes.TimeToSampleBox;
@@ -22,6 +20,8 @@ import com.googlecode.mp4parser.FileDataSourceImpl;
 import com.googlecode.mp4parser.authoring.Movie;
 import com.googlecode.mp4parser.authoring.Mp4TrackImpl;
 import com.googlecode.mp4parser.authoring.builder.DefaultMp4Builder;
+import com.karpolan.android.VideoRecorder.camera.AutoFitTextureView;
+import com.karpolan.android.VideoRecorder.camera.CameraVideoFragment;
 
 import java.io.File;
 import java.io.IOException;

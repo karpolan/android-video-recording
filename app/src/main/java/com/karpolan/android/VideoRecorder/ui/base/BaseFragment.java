@@ -1,11 +1,11 @@
-package com.androidwave.camera2video.ui.base;
+package com.karpolan.android.VideoRecorder.ui.base;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
